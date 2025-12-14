@@ -5,13 +5,20 @@
 {% block content %}
 <h2>Catálogo de Joyería</h2>
 
-<ul>
+<div class="catalogo">
     {% for joya in joyas %}
-    <li>
-        <strong>{{ joya.nombre }}</strong><br>
-        Material: {{ joya.material }}<br>
-        Precio: Q{{ joya.precio }}
-    </li>
+        <div class="card">
+            <img src="{{ url_for('static', filename='img/productos/' + joya.imagen) }}"
+                alt="{{ joya.nombre }}">
+
+            <h3>{{ joya.nombre }}</h3>
+            <p>{{ joya.materisal }}</p>
+            <p class="precio">Q{{ joya.precio }}</p>
+
+            {% if not joya.disponible %}
+                <span class="agotado">Agotado</span>
+            {% endif %}
+        </div>
     {% endfor %}
-</ul>
+</div>
 {% endblock %}
