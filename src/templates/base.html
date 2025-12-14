@@ -3,10 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Joyería Web{% endblock %}</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     </head>
     <body>
 
-        <header>
+        <header class="container">
             <h1>✨ Joyería Web</h1>
             <nav>
                 <a href="/">Inicio</a>
@@ -15,11 +17,9 @@
             <hr>
         </header>
 
-        <main>
-            {% block content %}
-            <!-- Contenido específico de cada página -->
-            {% endblock %}
-        </main>
-        
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+
     </body>
 </html>

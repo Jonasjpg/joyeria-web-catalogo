@@ -1,0 +1,45 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Header */
+header {
+    margin-bottom: 20px;
+}
+
+nav a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #b38b59; 
+}
+
+/* Contenido */
+main {
+    background: white;
+    padding: 20px;
+    border-radius: 6px;
+}
