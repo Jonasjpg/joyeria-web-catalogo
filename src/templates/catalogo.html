@@ -7,12 +7,17 @@
 
 <div class="catalogo">
     {% for joya in joyas %}
-        <div class="card">
-            <img src="{{ url_for('static', filename='img/productos/' + joya.imagen) }}"
+        <div class="card"
+            data-imagen="{{ url_for('static', filename='img/productos/' ~ joya.imagen) }}"
+            data-nombre="{{ joya.nombre }}"
+            data-material="{{ joya.material }}"
+            data-precio="{{ joya.precio }}">
+
+            <img src="{{ url_for('static', filename='img/productos/' ~ joya.imagen) }}"
                 alt="{{ joya.nombre }}">
 
             <h3>{{ joya.nombre }}</h3>
-            <p>{{ joya.materisal }}</p>
+            <p>{{ joya.material }}</p>
             <p class="precio">Q{{ joya.precio }}</p>
 
             {% if not joya.disponible %}

@@ -21,5 +21,17 @@
             {% block content %}{% endblock %}
         </div>
 
+        <div id="modal" class="modal hidden">
+            <div class="modal-content">
+                <span id="modal-close">&times;</span>
+                <img id="modal-img" src="" alt="">
+                <h3 id="modal-nombre"></h3>
+                <p id="modal-material"></p>
+                <p id="modal-precio"></p>
+            </div>
+        </div>
+
+        <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+
     </body>
 </html>
