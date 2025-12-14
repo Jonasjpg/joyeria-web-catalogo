@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Joyería Web{% endblock %}</title>
+    </head>
+    <body>
+
+        <header>
+            <h1>✨ Joyería Web</h1>
+            <nav>
+                <a href="/">Inicio</a>
+                <a href="/catalogo">Catálogo</a>
+            </nav>
+            <hr>
+        </header>
+
+        <main>
+            {% block content %}
+            <!-- Contenido específico de cada página -->
+            {% endblock %}
+        </main>
+        
+    </body>
+</html>
