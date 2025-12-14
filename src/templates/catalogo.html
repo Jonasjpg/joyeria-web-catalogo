@@ -4,5 +4,14 @@
 
 {% block content %}
 <h2>Catálogo de Joyería</h2>
-<p>Próximamente encontrarás una selección de nuestras mejores piezas.</p>
+
+<ul>
+    {% for joya in joyas %}
+    <li>
+        <strong>{{ joya.nombre }}</strong><br>
+        Material: {{ joya.material }}<br>
+        Precio: Q{{ joya.precio }}
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}
