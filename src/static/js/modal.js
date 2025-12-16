@@ -14,17 +14,27 @@ document.addEventListener("DOMContentLoaded", () => {
             modalMaterial.textContent = card.dataset.material;
             modalPrecio.textContent = "Q" + card.dataset.precio;
 
-            modal.classList.remove("hidden");
+            modal.classList.add("show");
+            document.body.classList.add("modal-open");
         });
     });
 
     modalClose.addEventListener("click", () => {
-        modal.classList.add("hidden");
+        modal.classList.remove("show");
+        document.body.classList.remove("modal-open");
     });
 
     modal.addEventListener("click", (e) => {
         if (e.target === modal) {
-            modal.classList.add("hidden");
+            modal.classList.remove("show");
+            document.body.classList.remove("modal-open");
+        }
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.classList.contains("show")) {
+            modal.classList.remove("show");
+            document.body.classList.remove("modal-open");
         }
     });
 });
