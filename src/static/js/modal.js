@@ -37,4 +37,26 @@ document.addEventListener("DOMContentLoaded", () => {
             document.body.classList.remove("modal-open");
         }
     });
+
+    const filtroBtns = document.querySelectorAll(".filtro-btn");
+    const cards = document.querySelectorAll(".card");
+
+    filtroBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+
+            // Estado visual del botón
+            filtroBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            const filtro = btn.dataset.filtro;
+
+            cards.forEach(card => {
+                if (filtro === "todas" || card.dataset.categoria === filtro) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+    });
 });

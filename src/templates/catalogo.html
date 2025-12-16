@@ -5,13 +5,21 @@
 {% block content %}
 <h2>Catálogo de Joyería</h2>
 
+<div class="filtros">
+    <button class="filtro-btn active" data-filtro="todas">Todas</button>
+    <button class="filtro-btn" data-filtro="aretes">Aretes</button>
+    <button class="filtro-btn" data-filtro="pulseras">Pulseras</button>
+    <button class="filtro-btn" data-filtro="anillos">Anillos</button>
+</div>
+
 <div class="catalogo">
     {% for joya in joyas %}
         <div class="card"
             data-imagen="{{ url_for('static', filename='img/productos/' ~ joya.imagen) }}"
             data-nombre="{{ joya.nombre }}"
             data-material="{{ joya.material }}"
-            data-precio="{{ joya.precio }}">
+            data-precio="{{ joya.precio }}"
+            data-categoria="{{ joya.categoria }}">
 
             <img src="{{ url_for('static', filename='img/productos/' ~ joya.imagen) }}"
                 alt="{{ joya.nombre }}">

@@ -138,3 +138,24 @@ main {
 body.modal-open {
     overflow: hidden;
 }
+
+.filtros {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filtro-btn {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 20px;
+    background: #eee;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.filtro-btn.active {
+    background: #b38b59;
+    color: white;
+}
