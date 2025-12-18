@@ -9,15 +9,24 @@
     <body>
 
         <header class="container">
-            <h1>✨ Joyería Web</h1>
+            <h1>✨ Joyería Web</h1><br>
             <nav>
                 <a href="/">Inicio</a>
                 <a href="/catalogo">Catálogo</a>
-            </nav>
+            </nav><br>
             <hr>
         </header>
 
         <div class="container">
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    <div class="flash-container">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
             {% block content %}{% endblock %}
         </div>
 

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Admin - Catálogo de Joyería{% endblock %}
+
+{% block content %}
+<h2>Administración del Catálogo de Joyería</h2><br>
+
+<a href="{{ url_for('logout') }}">Cerrar sesión</a><br><br>
+
+<!-- Formulario para agregar nuevo producto -->
+<form method="post" action="/admin/add" class="admin-form" enctype="multipart/form-data">
+
+    <label>Código</label>
+    <input type="text" name="codigo" required>
+
+    <label>Nombre</label>
+    <input type="text" name="nombre" required>
+
+    <label>Material</label>
+    <input type="text" name="material">
+
+    <label>Precio (Q)</label>
+    <input type="number" name="precio" required>
+
+    <label>Categoría</label>
+    <select name="categoria" required>
+        <option value="aretes">Aretes</option>
+        <option value="pulseras">Pulseras</option>
+        <option value="anillos">Anillos</option>
+    </select>
+
+    <label>Imagen (archivo)</label>
+    <input type="file" name="imagen" accept="image/*">
+
+    <button type="submit">Agregar Producto</button>
+</form><br><br>
+
+<hr>
+<h3>Productos Existentes</h3>
+<table border="1" cellpadding="8" cellspacing="0">
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Categoría</th>
+        <th>Acciones</th>
+    </tr>
+
+    {% for p in productos %}
+    <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.nombre }}</td>
+        <td>{{ p.precio }}</td>
+        <td>{{ p.categoria }}</td>
+        <td>
+            <a href="{{ url_for('editar_producto', id=p.id) }}">Editar</a> |
+            <a href="{{ url_for('eliminar_producto', id=p.id) }}"
+                onclick="return confirm('¿Estás seguro de eliminar este producto?')">
+                Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,11 @@
+[
+    {
+        "codigo": "TEST001",
+        "nombre": "Producto de Prueba 1",
+        "material": "Material demo",
+        "precio": 100,
+        "categoria": "Aretes",
+        "imagen": "demo.jpg",
+        "disponible": true
+    }
+]

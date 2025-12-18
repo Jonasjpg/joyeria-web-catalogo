@@ -12,6 +12,7 @@
     <button class="filtro-btn" data-filtro="anillos">Anillos</button>
 </div>
 
+{% if joyas %}
 <div class="catalogo">
     {% for joya in joyas %}
         <div class="card"
@@ -20,7 +21,7 @@
             data-material="{{ joya.material }}"
             data-precio="{{ joya.precio }}"
             data-categoria="{{ joya.categoria }}">
-
+            
             <img src="{{ url_for('static', filename='img/productos/' ~ joya.imagen) }}"
                 alt="{{ joya.nombre }}">
 
@@ -34,4 +35,7 @@
         </div>
     {% endfor %}
 </div>
+{% else %}
+    <p>No hay productos disponibles en el catálogo.</p>
+{% endif %}
 {% endblock %}

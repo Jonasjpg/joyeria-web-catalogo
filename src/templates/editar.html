@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Editar producto</h2>
+
+<form method="POST" action="{{ url_for('actualizar_producto', id=producto.id) }}">
+    <label>Nombre</label><br>
+    <input type="text" name="nombre" value="{{ producto.nombre }}" required><br><br>
+
+    <label>Material</label><br>
+    <input type="text" name="material" value="{{ producto.material }}"><br><br>
+
+    <label>Precio</label><br>
+    <input type="number" name="precio" value="{{ producto.precio }}" required><br><br>
+
+    <label>Categoría</label><br>
+    <select name="categoria" required>
+        <option value="aretes" {% if producto.categoria == "aretes" %}selected{% endif %}>Aretes</option>
+        <option value="pulseras" {% if producto.categoria == "pulseras" %}selected{% endif %}>Pulseras</option>
+        <option value="anillos" {% if producto.categoria == "anillos" %}selected{% endif %}>Anillos</option>
+    </select><br><br>
+
+    <button type="submit">Guardar cambios</button>
+</form>
+{% endblock %}
