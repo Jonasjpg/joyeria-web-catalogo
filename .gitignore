@@ -11,3 +11,6 @@ __pycache__/
 
 # Sistema
 .DS_Store
+
+# Archivos de configuración de entorno
+.env

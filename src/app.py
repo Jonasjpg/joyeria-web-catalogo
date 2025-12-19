@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from werkzeug.utils import secure_filename
+from dotenv import load_dotenv
+load_dotenv()
 import json
 import os
 import sqlite3
@@ -15,7 +17,13 @@ def allowed_file(filename):
     return "." in filename and \
               filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
-app.secret_key = "super-secret-key-cambiar-despues"
+app.secret_key = os.getenv("FLASK_SECRET_KEY")
+
+ADMIN_USER = os.getenv("ADMIN_USER")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
+
+def admin_required():
+    return session.get("admin")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -25,7 +33,7 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
 
-        if username == "admin" and password == "1234":
+        if username == ADMIN_USER and password == ADMIN_PASSWORD:
             session["admin"] = True
             return redirect(url_for("admin"))
         else:
@@ -106,7 +114,7 @@ def catalogo():
 
 @app.route("/admin")
 def admin():
-    if not session.get("admin"):
+    if not admin_required():
         return redirect(url_for("login"))
        
     productos = obtener_productos()
@@ -114,7 +122,7 @@ def admin():
 
 @app.route("/admin/editar/<int:id>")
 def editar_producto(id):
-    if not session.get("admin"):
+    if not admin_required():
         return redirect(url_for("login"))
     
     conn = get_db_connection()
@@ -127,7 +135,7 @@ def editar_producto(id):
 
 @app.route("/admin/actualizar/<int:id>", methods=["POST"])
 def actualizar_producto(id):
-    if not session.get("admin"):
+    if not admin_required():
         return redirect(url_for("login"))
     
     nombre = request.form["nombre"]
@@ -150,7 +158,7 @@ def actualizar_producto(id):
 
 @app.route("/admin/eliminar/<int:id>")
 def eliminar_producto(id):
-    if not session.get("admin"):
+    if not admin_required():
         return redirect(url_for("login"))
     
     conn = get_db_connection()
@@ -164,18 +172,23 @@ def eliminar_producto(id):
 
 @app.route("/admin/add", methods=["POST"])
 def admin_add():
+    if not admin_required():
+        return redirect(url_for("login"))
     codigo = request.form["codigo"]
     nombre = request.form["nombre"]
     material = request.form.get("material")
     precio = request.form["precio"]
     categoria = request.form["categoria"]
     imagen_file = request.files.get("imagen")
-    imagen_nombre = None
-
+        
     if imagen_file and allowed_file(imagen_file.filename):
         filename = secure_filename(imagen_file.filename)
         imagen_file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
         imagen_nombre = filename
+    
+    if not imagen_file or imagen_file.filename == "":
+        flash("La imagen es obligatoria.", "info")
+        return redirect(url_for("admin"))
 
     conn = get_db_connection()
     cursor = conn.cursor()
